@@ -45,6 +45,9 @@ public class GuzhenrenDevKitExampleMod {
 		LOGGER.info("[{}] loaded", MODID);
 		LOGGER.info("[{}] usage(liangu): slot8=kong_bai_gu_fang, input=DIAMOND -> output=DIRT", MODID);
 		LOGGER.info("[{}] liangu input mode: {}", MODID, INPUT_MODE);
+
+		net.guzhenren.devkit.tizhi.TizhiNames.register(100001, "示例体质");
+
 		ExampleShaZhaoKey.bootstrap(MODID);
 		ExampleShaZhaoBind.bootstrap(MODID);
 		ExampleShaZhaoLifecycle.bootstrap(MODID);
