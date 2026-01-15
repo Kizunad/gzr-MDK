@@ -22,7 +22,11 @@
 
 # Local runtime jars copied for dev
 /runtime/
-/sourceCode/**/libs/
+
+# Local dependency jars (not committed)
+# Keep libs/ directories (tracked via .gitkeep).
+/sourceCode/**/libs/*
+!/sourceCode/**/libs/.gitkeep
 
 # Logs
 **/*.log
