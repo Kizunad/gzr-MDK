@@ -132,7 +132,7 @@ TagKey<DamageType> hunDao = GuzhenrenDamageTypeTags.dao("hun_dao");
 
 DevKit / Example 的关键依赖通过 `mcreator.gradle` 以本地 jar 方式引入（例如 `files('libs/guzhenren-12.9.jar')`）。
 
-重要：这些 jar **默认不随 git 提交**（体积/版权/分发限制），所以你克隆仓库后需要自己准备并放入对应目录。
+重要：这些 jar（蛊真人的模组和相关前置）**默认不随 git 提交**（体积/版权/分发限制），所以你克隆仓库后需要自己准备并放入对应目录。
 
 本仓库会保留 `libs/` 目录占位（通过 `.gitkeep`），但目录里不会有 jar。
 
@@ -150,6 +150,10 @@ DevKit / Example 的关键依赖通过 `mcreator.gradle` 以本地 jar 方式引
 - `prickle-neoforge-1.21.1-21.1.10.jar`
 
 校验方式：在对应模块目录执行 `./gradlew classes`，能编译通过就说明依赖齐全。
+
+注意：
+- 不要随意删除或改名 `libs/` 下 jar。
+- 不要擅自把依赖改成远程坐标（除非你确定要迁移依赖管理）。
 
 ### 3) Mixin 配置必须同步
 
