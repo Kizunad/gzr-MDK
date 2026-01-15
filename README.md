@@ -131,7 +131,7 @@ TagKey<DamageType> hunDao = GuzhenrenDamageTypeTags.dao("hun_dao");
 ### 2) 依赖来自本地 libs/
 
 DevKit/Example 的依赖在 `mcreator.gradle` 使用 `flatDir { dirs 'libs' }` + `files('libs/xxx.jar')`。
-- 不要随意删除或改名 `libs/` 下 jar。
+- 不要随意删除或改名 `libs/` 下 jar(蛊真人的模组和相关前置)。
 - 不要擅自把依赖改成远程坐标（除非你确定要迁移依赖管理）。
 
 ### 3) Mixin 配置必须同步
