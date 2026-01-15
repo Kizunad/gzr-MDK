@@ -1,0 +1,31 @@
+# Build outputs
+**/build/
+**/bin/
+**/out/
+
+# Gradle caches
+**/.gradle/
+
+# Run directories (worlds/logs/crash-reports)
+**/run/
+
+# IDE
+**/.idea/
+**/*.iml
+**/.classpath
+**/.project
+**/.settings/
+**/.vscode/
+
+# OS
+.DS_Store
+
+# Local runtime jars copied for dev
+/runtime/
+/sourceCode/**/libs/
+
+# Logs
+**/*.log
+
+# Big MCreator project file (optional; uncomment if you don't want it in git)
+# sourceCode/guzhenren/guzhenren.mcreator

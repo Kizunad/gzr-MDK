@@ -1,0 +1,19 @@
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compileOnly files('libs/guzhenren-12.9.jar')
+
+    runtimeOnly files(
+        'libs/guzhenren-12.9.jar',
+        'libs/geckolib-neoforge-1.21.1-4.7.7.jar',
+        'libs/Pehkui-3.8.3+1.21-neoforge.jar',
+        'libs/player-animation-lib-forge-2.0.1+1.21.1.jar',
+        'libs/attributefix-neoforge-1.21.1-21.1.2.jar',
+        'libs/bookshelf-neoforge-1.21.1-21.1.68.jar',
+        'libs/prickle-neoforge-1.21.1-21.1.10.jar'
+    )
+}

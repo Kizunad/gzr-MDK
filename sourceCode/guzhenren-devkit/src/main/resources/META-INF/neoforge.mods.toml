@@ -1,0 +1,69 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="guzhenren_devkit"
+version="0.1.0"
+displayName="Guzhenren DevKit"
+authors="DevKit"
+description="Addon MDK & injection-based hook framework for guzhenren."
+
+[[mods]]
+modId="guzhenren_devkit_test"
+version="0.1.0"
+displayName="Guzhenren DevKit TestMod"
+authors="DevKit"
+description="Internal test mod for validating DevKit hooks."
+
+[[dependencies.guzhenren_devkit]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.65,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.guzhenren_devkit]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+[[mixins]]
+    config = "guzhenren_devkit.mixins.json"
+
+[[dependencies.guzhenren_devkit]]
+    modId="guzhenren"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.guzhenren_devkit_test]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.65,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.guzhenren_devkit_test]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.guzhenren_devkit_test]]
+    modId="guzhenren_devkit"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.guzhenren_devkit_test]]
+    modId="guzhenren"
+    type="required"
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"

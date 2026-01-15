@@ -1,0 +1,16 @@
+dependencies {
+    // 作为 Addon：编译期依赖 DevKit API（通过 includeBuild('../guzhenren-devkit') 引入）
+    implementation 'net.guzhenren.devkit:guzhenren-devkit:0.1.0'
+
+    compileOnly files('libs/guzhenren-12.9.jar')
+
+    runtimeOnly files(
+        'libs/guzhenren-12.9.jar',
+        'libs/geckolib-neoforge-1.21.1-4.7.7.jar',
+        'libs/Pehkui-3.8.3+1.21-neoforge.jar',
+        'libs/player-animation-lib-forge-2.0.1+1.21.1.jar',
+        'libs/attributefix-neoforge-1.21.1-21.1.2.jar',
+        'libs/bookshelf-neoforge-1.21.1-21.1.68.jar',
+        'libs/prickle-neoforge-1.21.1-21.1.10.jar'
+    )
+}

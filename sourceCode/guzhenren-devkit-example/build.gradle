@@ -1,0 +1,46 @@
+plugins {
+    id 'eclipse'
+    id 'net.neoforged.moddev' version '2.0.116'
+}
+
+version = '0.1.0'
+base.archivesName = "guzhenren-devkit-example"
+
+group = 'net.guzhenren.devkit.example'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = "21.1.65"
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.INFO
+        }
+
+        verifyNoWindow {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        example {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+apply from: 'mcreator.gradle'

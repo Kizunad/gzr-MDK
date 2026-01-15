@@ -1,0 +1,72 @@
+plugins {
+    id 'eclipse'
+    id 'net.neoforged.moddev' version '2.0.116'
+}
+
+version = '0.1.0'
+base.archivesName = "guzhenren-devkit"
+
+group = 'net.guzhenren.devkit'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = "21.1.65"
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.INFO
+        }
+
+        headless {
+            // 说明：Minecraft 客户端(含fml early window)本质上需要图形上下文；
+            // “headless”在这里的目标是尽量避免在 WSLg 弹窗，并在无窗口/无GPU时尽早暴露加载错误。
+            client()
+
+            // 让用户可通过 `MCREATOR_JVM_OPTIONS` 额外注入参数（和主模组一致）
+            def mcreatorJvmOptions = System.getenv('MCREATOR_JVM_OPTIONS')
+            if (mcreatorJvmOptions) {
+                mcreatorJvmOptions.split("\\s+").findAll { it.trim() }.each { arg ->
+                    jvmArgument(arg)
+                }
+            }
+
+            // 尝试关闭早期窗口控制（对是否弹窗不保证100%）
+            jvmArgument("-Dfml.earlyWindowControl=false")
+
+            systemProperty 'java.awt.headless', 'true'
+            systemProperty 'org.lwjgl.opengl.Display.allowSoftwareOpenGL', 'true'
+            systemProperty 'org.lwjgl.glfw.checkThread0', 'false'
+
+            environment 'MESA_GL_VERSION_OVERRIDE', '3.3'
+            environment 'LIBGL_ALWAYS_SOFTWARE', '1'
+        }
+
+        // 真正不弹窗的路径：用 server run 做加载验证（不创建客户端窗口）
+        verifyNoWindow {
+            server()
+            // DedicatedServer 的 --nogui 参数
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        devkit {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+apply from: 'mcreator.gradle'

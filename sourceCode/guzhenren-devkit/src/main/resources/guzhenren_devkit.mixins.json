@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "package": "net.guzhenren.devkit.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SanZhaoAnJianZHookMixin",
+    "SanZhaoAnJianXHookMixin",
+    "SanZhaoAnJianCHookMixin",
+    "SanZhaoAnJianVHookMixin",
+    "RenWuGuiButtonHookMixin",
+    "KaishilianzhianniuHookMixin",
+    "LianGuguiTickHookMixin",
+    "SanZhaoBind1HookMixin",
+    "SanZhaoBind2HookMixin",
+    "SanZhaoBind3HookMixin",
+    "SanZhaoBind4HookMixin",
+    "ShaZhaoUiTickHookMixin",
+    "ShaZhao2UiTickHookMixin",
+    "ShaZhao3UiTickHookMixin",
+    "ShaZhao4UiTickHookMixin"
+  ],
+  "client": [],
+  "refmap": "guzhenren_devkit.refmap.json",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.4"
+}
