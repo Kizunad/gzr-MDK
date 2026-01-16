@@ -18,7 +18,11 @@
     "ShaZhao2UiTickHookMixin",
     "ShaZhao3UiTickHookMixin",
     "ShaZhao4UiTickHookMixin",
-    "UishuxingshijuetiHookMixin"
+    "UishuxingshijuetiHookMixin",
+    "DiZangHuaLiupaiDropHookMixin",
+    "PaiMaiSelectItemHookMixin",
+    "ShouGouGuiSellHookMixin",
+    "ShangDianStockHookMixin"
   ],
   "client": [],
   "refmap": "guzhenren_devkit.refmap.json",

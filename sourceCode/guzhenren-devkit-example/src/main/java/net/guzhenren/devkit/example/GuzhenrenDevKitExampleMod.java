@@ -51,6 +51,10 @@ public class GuzhenrenDevKitExampleMod {
 		ExampleShaZhaoKey.bootstrap(MODID);
 		ExampleShaZhaoBind.bootstrap(MODID);
 		ExampleShaZhaoLifecycle.bootstrap(MODID);
+		ExampleShaZhaoHudIcon.bootstrap(MODID);
+		ExampleDiZangHua.bootstrap(MODID);
+		ExamplePaiMai.bootstrap(MODID);
+		ExampleShop.bootstrap(MODID);
 		bootstrapLianGu();
 	}
 

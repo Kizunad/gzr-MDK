@@ -12,6 +12,7 @@ public final class ShaZhaoHooks {
 	public static final HookRegistry<ShaZhaoKeyContext> KEY_PRESS = new HookRegistry<>();
 	public static final HookRegistry<ShaZhaoBindContext> BIND = new HookRegistry<>();
 	public static final HookRegistry<ShaZhaoTickContext> TICK = new HookRegistry<>();
+	public static final HookRegistry<ShaZhaoHudIconContext> HUD_ICON = new HookRegistry<>();
 
 	public static HookRegistration registerKeyPress(String owner, int priority, ShaZhaoKeyHandler handler) {
 		return KEY_PRESS.register(new HookRegistration(Objects.requireNonNull(owner, "owner"), priority), handler);
@@ -41,5 +42,15 @@ public final class ShaZhaoHooks {
 		Objects.requireNonNull(keySlots, "keySlots");
 		Objects.requireNonNull(handler, "handler");
 		return registerTick(owner, priority, ctx -> keySlots.contains(ctx.keySlotIndex()) ? handler.handle(ctx) : net.guzhenren.devkit.hook.HookResult.PASS);
+	}
+
+	public static HookRegistration registerHudIcon(String owner, int priority, ShaZhaoHudIconHandler handler) {
+		return HUD_ICON.register(new HookRegistration(Objects.requireNonNull(owner, "owner"), priority), handler);
+	}
+
+	public static HookRegistration registerHudIcon(String owner, int priority, java.util.Set<Integer> keySlots, ShaZhaoHudIconHandler handler) {
+		Objects.requireNonNull(keySlots, "keySlots");
+		Objects.requireNonNull(handler, "handler");
+		return registerHudIcon(owner, priority, ctx -> keySlots.contains(ctx.keySlotIndex()) ? handler.handle(ctx) : net.guzhenren.devkit.hook.HookResult.PASS);
 	}
 }

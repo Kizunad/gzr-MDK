@@ -7,5 +7,6 @@ public class GuzhenrenDevKitMod {
 	public static final String MODID = "guzhenren_devkit";
 
 	public GuzhenrenDevKitMod() {
+		net.guzhenren.devkit.dizanghua.DiZangHuaTagRegistry.bootstrap();
 	}
 }
