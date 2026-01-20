@@ -22,6 +22,36 @@
     └── guzhenren/                 # 主模组（MCreator 导出，谨慎修改）
 ```
 
+## 支持的功能一览
+
+DevKit 通过 **Mixin 注入** 捕获主模组关键流程，再通过 **HookRegistry** 分发给 Addon。
+
+当前已支持（持续扩展中）：
+
+- **杀招（ShaZhao）**
+  - 按键触发（Z/X/C/V）、绑定确认、UI Tick：`net.guzhenren.devkit.shazhao.ShaZhaoHooks`
+  - **HUD 图标注入**：`ShaZhaoHooks.HUD_ICON`（允许按 `boundId/boundItem` 返回自定义 `ResourceLocation` 图标）
+- **地藏花（DiZangHua）**
+  - Tag 扩展掉落池：`guzhenren:z1~z4`（稀有度）+ `guzhenren:<流派id>`（流派池）
+  - **掉落替换 Hook**：`DiZangHuaHooks.DROP`（当前仅覆盖“流派地藏花”）
+- **拍卖行（PaiMaiHang）**
+  - 全局拍卖池 Tag：`guzhenren:paimaihang`
+  - **拍品选择 Hook**：`PaiMaiHooks.SELECT_ITEM`（可替换本轮上架物品）
+- **商店 / 收购（ShangDian / ShouGou）**
+  - **收购卖出拦截 Hook**：`ShopHooks.SHOU_GOU_SELL`（允许/拒绝本次回收）
+  - **商店库存注入 Hook**：`ShopHooks.SHANG_DIAN_STOCK`（注入/替换商店商品槽位）
+  - 限制：目前覆盖 `ShangDian` 与 `ShouGouGui`；`Shangdian4/5/6/8/9` 等变体尚未接入；购买扣费/价格逻辑仍走主模组
+- **炼蛊 / 任务 / 体质 / 道伤害**
+  - 外部炼蛊配方：`net.guzhenren.devkit.liangu.*`
+  - 任务按钮 Hook：`RenWuHooks`（见 `RenWuGuiButtonHookMixin`）
+  - 体质显示名：`TizhiNames`
+  - 道伤害分类：`data/guzhenren/tags/damage_type/<xxx>_dao.json`
+- **工具**
+  - TagKey/常用 tag：`TagKeyUtil` / `GuzhenrenTags`
+  - ItemStack CustomData 读写：`CustomDataAccess`
+
+示例代码入口：`sourceCode/guzhenren-devkit-example/src/main/java/net/guzhenren/devkit/example/`（`ExampleShaZhaoHudIcon` / `ExampleDiZangHua` / `ExamplePaiMai` / `ExampleShop` 等）。
+
 ## 环境要求
 
 - Java：**21**（项目使用 toolchain）
@@ -83,6 +113,14 @@ cd sourceCode/guzhenren
 
 ## DevKit 提供的 API
 
+### 0) 示例入口（建议先看）
+
+- `sourceCode/guzhenren-devkit-example/src/main/java/net/guzhenren/devkit/example/`
+  - `ExampleShaZhaoHudIcon`：杀招 HUD 图标注入
+  - `ExampleDiZangHua`：地藏花掉落替换
+  - `ExamplePaiMai`：拍卖行拍品选择替换
+  - `ExampleShop`：收购拦截 + 商店库存注入
+
 ### 1) 体质显示名扩展（TizhiNames）
 
 用途：让 Addon 自定义体质 ID 的显示名字（UI 里显示 `体质:<name>`）。
@@ -96,6 +134,9 @@ TizhiNames.register(100001, "示例体质");
 ```
 
 ### 2) “道”伤害分类：DamageType tags（*_dao）
+
+> 其他新增 API（杀招 HUD / 地藏花 / 拍卖行 / 商店）已在上方「支持的功能一览」列出，后续会把这些 API 章节化补齐。
+
 
 你们的约定：**道痕识别依赖 tag**，tag ID 形如 `guzhenren:*_dao`。
 
@@ -172,6 +213,6 @@ DevKit / Example 的关键依赖通过 `mcreator.gradle` 以本地 jar 方式引
 - 确认 `libs/` 目录存在且 jar 文件名匹配。
 
 ### Q3：我的 tag 追加没生效？
-- 确认 tag 文件路径是 `data/guzhenren/tags/damage_type/<xxx>_dao.json`。
+- 确认 tag 文件路径正确（例如道伤害：`data/guzhenren/tags/damage_type/<xxx>_dao.json`；拍卖池：`data/guzhenren/tags/items/paimaihang.json`）。
 - 确认 `"replace": false`。
-- 确认 values 里写的是 `"<modid>:<damage_type_id>"`。
+- 确认 values 里写的是 `"<modid>:<id>"`。
