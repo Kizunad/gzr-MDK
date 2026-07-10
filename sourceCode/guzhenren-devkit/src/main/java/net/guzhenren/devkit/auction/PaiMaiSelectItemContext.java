@@ -73,34 +73,51 @@ public final class PaiMaiSelectItemContext {
 	/**
 	 * 仅设置起拍价，竞价幅度按起拍价的 10% 自动推算（对齐主模组默认 价格:竞价 = 10:1 的比例）。
 	 *
+	 * <p>传入负数视为无效，保持“未覆盖”状态（{@code price} 维持 {@code -1.0}，
+	 * {@code hasPriceOverride()} 返回 {@code false}），Mixin 不会写入世界变量。</p>
+	 *
 	 * @param price 起拍价，须 >= 0
 	 */
-	/**
-	 * 设置 price 的值。
-	 */
 	public void setPrice(double price) {
+		if (price < 0.0) {
+			this.price = -1.0;
+			this.bidIncrement = -1.0;
+			return;
+		}
 		this.price = price;
-		this.bidIncrement = price >= 0.0 ? price / 10.0 : -1.0;
+		this.bidIncrement = price / 10.0;
 	}
 
 	/**
 	 * 同时设置起拍价与每次竞价加价幅度。
 	 *
+	 * <p>任一参数为负数时，对应字段保持“未覆盖”状态（{@code -1.0}），不会被写入世界变量。</p>
+	 *
 	 * @param price        起拍价，须 >= 0
 	 * @param bidIncrement 每次加价幅度，须 >= 0
 	 */
-	/**
-	 * 设置 price 的值。
-	 */
 	public void setPrice(double price, double bidIncrement) {
-		this.price = price;
-		this.bidIncrement = bidIncrement;
+		this.price = price < 0.0 ? -1.0 : price;
+		this.bidIncrement = bidIncrement < 0.0 ? -1.0 : bidIncrement;
 	}
 
 	/**
-	 * 设置 bid increment 的值。
+	 * 设置每次竞价加价幅度。
+	 *
+	 * <p><b>依赖关系：</b>本方法<b>不会单独触发价格覆盖</b>。只有当起拍价已通过
+	 * {@link #setPrice(double)} 或 {@link #setPrice(double, double)} 设为正值时，
+	 * {@code hasPriceOverride()} 才返回 {@code true}，Mixin 才会把价格写入世界变量。
+	 * 若单独调用本方法而 {@code price} 仍为 {@code -1.0}，则本 {@code bidIncrement}
+	 * 不会被写入（Mixin 的价格覆盖分支整体跳过）。</p>
+	 *
+	 * <p>传入负数视为无效，保持原 {@code bidIncrement} 不变。</p>
+	 *
+	 * @param bidIncrement 每次加价幅度，须 >= 0
 	 */
 	public void setBidIncrement(double bidIncrement) {
+		if (bidIncrement < 0.0) {
+			return;
+		}
 		this.bidIncrement = bidIncrement;
 	}
 }

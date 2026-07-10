@@ -86,6 +86,14 @@ public final class ExampleNiXiangLianGu {
 				vars.LianGu = true;
 				vars.markSyncDirty();
 
+				// 消耗 slot0 的 1 颗钻石（钻石→泥土转换；不消耗则 1 颗钻石可无限产泥土）。
+				ItemStack slot0 = LianGuMenuSlots.getSlot(player, 0);
+				if (!slot0.isEmpty()) {
+					ItemStack consumed = slot0.copy();
+					consumed.shrink(1);
+					LianGuMenuSlots.setSlot(player, 0, consumed);
+				}
+
 				if (!player.level().isClientSide()) {
 					LOGGER.info("[{}] nixiang start ok: GuFang={}", modId, NIXIANG_GUFANG_ID);
 				}

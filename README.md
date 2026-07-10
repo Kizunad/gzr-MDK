@@ -41,7 +41,7 @@
 
 ## 仓库结构
 
-```
+```text
 ./
 └── sourceCode/
     ├── guzhenren-devkit/          # DevKit：Mixin 注入 + Hook 分发
@@ -113,7 +113,7 @@ Example 模块通过 Gradle 复合构建直接引用 DevKit：
 
 在 Example 目录运行：
 
-```
+```bash
 cd sourceCode/guzhenren-devkit-example
 ./gradlew runClient
 ```
@@ -124,7 +124,7 @@ cd sourceCode/guzhenren-devkit-example
 
 ### DevKit
 
-```
+```bash
 cd sourceCode/guzhenren-devkit
 ./gradlew runClient
 ./gradlew runServer
@@ -135,7 +135,7 @@ cd sourceCode/guzhenren-devkit
 
 ### Example Addon
 
-```
+```bash
 cd sourceCode/guzhenren-devkit-example
 ./gradlew runClient
 ./gradlew runServer
@@ -145,7 +145,7 @@ cd sourceCode/guzhenren-devkit-example
 
 ### 主模组（仅当你需要验证/参考）
 
-```
+```bash
 cd sourceCode/guzhenren
 ./gradlew runClient
 ./gradlew runServer
