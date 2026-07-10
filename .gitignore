@@ -31,5 +31,8 @@
 # Logs
 **/*.log
 
+# Temp decompile / analysis scratch (not committed)
+/sourceCode/.decompile/
+
 # Big MCreator project file (optional; uncomment if you don't want it in git)
 # sourceCode/guzhenren/guzhenren.mcreator
