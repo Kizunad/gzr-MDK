@@ -28,6 +28,9 @@ public class DiZangHuaLiupaiDropHookMixin {
 	// 每写一次槽位就触发一次、且用非 z 标签物品(如钻石)覆盖 slot0 会导致循环终止条件永不成立 → 死循环/卡服。
 	// 因此注入点改为 TAIL（整个过程执行结束后），此时 slot0 已是收敛后的合法掉落物，
 	// 在此一次性替换为自定义掉落物即可，不会破坏循环也不会刷屏。
+	/**
+	 * 执行 after drop 操作。
+	 */
 	@Inject(method = "execute", at = @At("TAIL"))
 	private static void guzhenren_devkit$afterDrop(LevelAccessor world, double x, double y, double z, Entity entity, CallbackInfo ci) {
 		if (!(entity instanceof Player player)) {

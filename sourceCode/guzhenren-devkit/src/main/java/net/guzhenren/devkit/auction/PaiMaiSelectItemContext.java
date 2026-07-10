@@ -29,6 +29,9 @@ public final class PaiMaiSelectItemContext {
 	/** 每次竞价加价幅度（对应 {@code MapVariables.PaiMaiHang_JingJia}）；<0 表示未覆盖。 */
 	private double bidIncrement = -1.0;
 
+	/**
+	 * 构造方法。
+	 */
 	public PaiMaiSelectItemContext(LevelAccessor level, ItemStack selectedItem) {
 		this.level = level;
 		this.selectedItem = selectedItem == null ? ItemStack.EMPTY : selectedItem;
@@ -38,10 +41,16 @@ public final class PaiMaiSelectItemContext {
 		return level;
 	}
 
+	/**
+	 * 执行 selected item 操作。
+	 */
 	public ItemStack selectedItem() {
 		return selectedItem;
 	}
 
+	/**
+	 * 设置 selected item 的值。
+	 */
 	public void setSelectedItem(ItemStack selectedItem) {
 		this.selectedItem = selectedItem == null ? ItemStack.EMPTY : selectedItem;
 	}
@@ -66,6 +75,9 @@ public final class PaiMaiSelectItemContext {
 	 *
 	 * @param price 起拍价，须 >= 0
 	 */
+	/**
+	 * 设置 price 的值。
+	 */
 	public void setPrice(double price) {
 		this.price = price;
 		this.bidIncrement = price >= 0.0 ? price / 10.0 : -1.0;
@@ -77,11 +89,17 @@ public final class PaiMaiSelectItemContext {
 	 * @param price        起拍价，须 >= 0
 	 * @param bidIncrement 每次加价幅度，须 >= 0
 	 */
+	/**
+	 * 设置 price 的值。
+	 */
 	public void setPrice(double price, double bidIncrement) {
 		this.price = price;
 		this.bidIncrement = bidIncrement;
 	}
 
+	/**
+	 * 设置 bid increment 的值。
+	 */
 	public void setBidIncrement(double bidIncrement) {
 		this.bidIncrement = bidIncrement;
 	}

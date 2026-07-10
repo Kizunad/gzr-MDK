@@ -14,6 +14,9 @@ import net.minecraft.world.entity.player.Player;
  * 因此“是否正在逆向炼蛊”由 {@code GuFang} 的取值区分（见 {@link #isRunning}）。
  */
 public interface ExternalNiXiangLianGuRecipe {
+	/**
+	 * 返回该配方的唯一标识。
+	 */
 	String id();
 
 	/** 在“逆炼开始”按钮点击时调用。返回 true 表示由本配方接管，DevKit 会取消原版开始逻辑。 */

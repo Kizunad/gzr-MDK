@@ -38,6 +38,9 @@ public class PaiMaiSelectItemHookMixin {
 					shift = At.Shift.BEFORE
 			)
 	)
+	/**
+	 * 执行 before auction price 操作。
+	 */
 	private static void guzhenren_devkit$beforeAuctionPrice(Event event, LevelAccessor world, CallbackInfo ci) {
 		if (world == null || world.isClientSide()) {
 			return;

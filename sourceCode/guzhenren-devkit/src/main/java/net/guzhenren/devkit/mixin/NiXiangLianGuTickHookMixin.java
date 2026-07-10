@@ -24,6 +24,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(NiLianGuiDangGaiGUIDaKaiShiMeiKeFaShengProcedure.class)
 public class NiXiangLianGuTickHookMixin {
+	/**
+	 * DevKit 注入到目标过程的钩子；当外部处理器接管时取消原版逻辑。
+	 */
 	@Inject(method = "execute", at = @At("HEAD"), cancellable = true)
 	private static void guzhenren_devkit$hook(LevelAccessor world, double x, double y, double z, Entity entity, CallbackInfo ci) {
 		if (!(entity instanceof Player player)) {

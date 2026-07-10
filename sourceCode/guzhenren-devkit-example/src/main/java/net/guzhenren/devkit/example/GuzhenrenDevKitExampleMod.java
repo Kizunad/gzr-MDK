@@ -47,6 +47,9 @@ public class GuzhenrenDevKitExampleMod {
 		private static final double LIANGU_STEP = 1d;                        // 每 tick 进度 +1（1 个 1 个涨）
 		private static final double LIANGU_PRODUCE_AT = LIANGU_MAX;          // 达到满值即产出
 
+	/**
+	 * 构造方法。
+	 */
 	public GuzhenrenDevKitExampleMod() {
 		LOGGER.info("[{}] loaded", MODID);
 		LOGGER.info("[{}] usage(liangu): slot8=kong_bai_gu_fang, input=DIAMOND -> output=DIRT", MODID);
@@ -66,15 +69,24 @@ public class GuzhenrenDevKitExampleMod {
 	}
 
 
+	/**
+	 * 执行 bootstrap lian gu 操作。
+	 */
 	private static void bootstrapLianGu() {
 		// 外部炼蛊配方的入口：DevKit 在 “点击开始炼制” 的路径上用 Mixin 注入。
 		// 当 matches(player) 返回 true 时，DevKit 会让这个外部配方接管开始/每tick推进。
 		LianGuRecipes.register(new ExternalLianGuRecipe() {
+			/**
+			 * 返回该配方的唯一标识。
+			 */
 			@Override
 			public String id() {
 				return MODID + ":liangu_example";
 			}
 
+			/**
+			 * 判断该配方是否适用于给定玩家。
+			 */
 			@Override
 			public boolean matches(Player player) {
 				// 已经处于炼蛊中就不允许重新开始。
@@ -98,6 +110,9 @@ public class GuzhenrenDevKitExampleMod {
 				return findDiamondSlot(player) != -1;
 			}
 
+			/**
+			 * 配方开始时对给定玩家调用。
+			 */
 			@Override
 			public void onStart(Player player) {
 				int inputSlot = findDiamondSlot(player);
@@ -133,6 +148,9 @@ public class GuzhenrenDevKitExampleMod {
 				}
 			}
 
+			/**
+			 * 配方激活期间每个 tick 对给定玩家调用。
+			 */
 			@Override
 			public void onTick(Player player) {
 				GuzhenrenModVariables.PlayerVariables vars = player.getData(GuzhenrenModVariables.PLAYER_VARIABLES);
@@ -164,11 +182,17 @@ public class GuzhenrenDevKitExampleMod {
 				vars.markSyncDirty();
 			}
 
+			/**
+			 * 返回 active 是否处于激活状态。
+			 */
 			@Override
 			public boolean isActive(Player player) {
 				return ExternalLianGuRecipe.isRunning(player, EXAMPLE_GUFANG_ID);
 			}
 
+			/**
+			 * 查找匹配给定上下文的diamond slot。
+			 */
 			private int findDiamondSlot(Player player) {
 				if (INPUT_MODE == LianGuInputMode.SLOT0_ONLY) {
 					return isDiamond(LianGuMenuSlots.getSlot(player, 0)) ? 0 : -1;
@@ -176,6 +200,9 @@ public class GuzhenrenDevKitExampleMod {
 				return LianGuMenuSlots.findFirstMatchInInputs(player, this::isDiamond);
 			}
 
+			/**
+			 * 返回 diamond 是否处于激活状态。
+			 */
 			private boolean isDiamond(ItemStack stack) {
 				return !stack.isEmpty() && stack.getItem() == Items.DIAMOND;
 			}

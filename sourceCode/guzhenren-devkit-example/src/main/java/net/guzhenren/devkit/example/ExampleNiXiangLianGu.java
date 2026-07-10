@@ -26,6 +26,9 @@ import net.minecraft.world.item.Items;
  * 只要 slot0 是钻石就会优先于原版逻辑触发。验证完毕后如需恢复原版逆炼，移除本注册即可。
  */
 public final class ExampleNiXiangLianGu {
+	/**
+	 * 构造方法。
+	 */
 	private ExampleNiXiangLianGu() {
 	}
 
@@ -41,13 +44,22 @@ public final class ExampleNiXiangLianGu {
 	// 逆炼 GUI 的产出槽位（主模组 NiLian3Procedure 把产出放入 slot2/3/4，此处取 slot2 作演示输出：泥土）。
 	private static final int OUTPUT_SLOT = 2;
 
+	/**
+	 * 使用给定 mod id 将该示例注册到 DevKit。
+	 */
 	public static void bootstrap(String modId) {
 		NiXiangLianGuRecipes.register(new ExternalNiXiangLianGuRecipe() {
+			/**
+			 * 返回该配方的唯一标识。
+			 */
 			@Override
 			public String id() {
 				return modId + ":nixiang_example";
 			}
 
+			/**
+			 * 判断该配方是否适用于给定玩家。
+			 */
 			@Override
 			public boolean matches(Player player) {
 				// 已经在炼蛊/逆炼中不允许重新开始。
@@ -63,6 +75,9 @@ public final class ExampleNiXiangLianGu {
 				return !slot0.isEmpty() && slot0.getItem() == Items.DIAMOND;
 			}
 
+			/**
+			 * 配方开始时对给定玩家调用。
+			 */
 			@Override
 			public void onStart(Player player) {
 				GuzhenrenModVariables.PlayerVariables vars = player.getData(GuzhenrenModVariables.PLAYER_VARIABLES);
@@ -76,6 +91,9 @@ public final class ExampleNiXiangLianGu {
 				}
 			}
 
+			/**
+			 * 配方激活期间每个 tick 对给定玩家调用。
+			 */
 			@Override
 			public void onTick(Player player) {
 				GuzhenrenModVariables.PlayerVariables vars = player.getData(GuzhenrenModVariables.PLAYER_VARIABLES);
@@ -106,6 +124,9 @@ public final class ExampleNiXiangLianGu {
 				vars.markSyncDirty();
 			}
 
+			/**
+			 * 返回 active 是否处于激活状态。
+			 */
 			@Override
 			public boolean isActive(Player player) {
 				return ExternalNiXiangLianGuRecipe.isRunning(player, NIXIANG_GUFANG_ID);

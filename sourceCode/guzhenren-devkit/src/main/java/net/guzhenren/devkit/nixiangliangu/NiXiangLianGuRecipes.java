@@ -17,17 +17,29 @@ import net.minecraft.world.entity.player.Player;
 public final class NiXiangLianGuRecipes {
 	private static final CopyOnWriteArrayList<ExternalNiXiangLianGuRecipe> RECIPES = new CopyOnWriteArrayList<>();
 
+	/**
+	 * 构造方法。
+	 */
 	private NiXiangLianGuRecipes() {
 	}
 
+	/**
+	 * 将该条目注册到 DevKit 注册表。
+	 */
 	public static void register(ExternalNiXiangLianGuRecipe recipe) {
 		RECIPES.add(recipe);
 	}
 
+	/**
+	 * 执行 all 操作。
+	 */
 	public static List<ExternalNiXiangLianGuRecipe> all() {
 		return List.copyOf(RECIPES);
 	}
 
+	/**
+	 * 查找匹配给定上下文的match。
+	 */
 	public static ExternalNiXiangLianGuRecipe findMatch(Player player) {
 		for (ExternalNiXiangLianGuRecipe recipe : RECIPES) {
 			try {
@@ -42,6 +54,9 @@ public final class NiXiangLianGuRecipes {
 		return null;
 	}
 
+	/**
+	 * 查找匹配给定上下文的active。
+	 */
 	public static ExternalNiXiangLianGuRecipe findActive(Player player) {
 		for (ExternalNiXiangLianGuRecipe recipe : RECIPES) {
 			try {
